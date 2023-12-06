@@ -1,0 +1,49 @@
+{% extends 'index7.html' %}
+
+{% block content %}
+
+<style>
+    .home-container{
+        justify-content: center;
+    }
+    .book-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px;
+    }
+    .book-image{
+        width: 55%;
+    }
+    .book-info{
+        width: 30%;
+    }
+</style>
+
+<div class="home-container">
+    <div class="book-container">
+        <div class="book-image">
+            <img src="{{ book.cover_img.url }}" height=280px; width=200px;>
+        </div>
+    
+        <div class="book-info">
+            <h4><b>{{book.title}}</b></h4>
+            by <span>
+                {% for author in book.author.all %}
+                    {{author.name}},
+                {% endfor %}
+            </span>
+            <br>
+            <p>{{book.description}}</p>
+            <hr>
+            <span>{{book.number_of_pages}} pages</span>
+            <br>
+            <i>{{book.total_rating}} ratings</i>
+            <h5><i>{{book.average_rating}} average rating</i></h5>
+        </div>
+    </div>
+</div>
+ 
+
+
+{% endblock content %}

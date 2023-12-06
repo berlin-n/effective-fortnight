@@ -1,0 +1,73 @@
+{% extends 'index7.html' %}
+
+{% block content %}
+
+<style>
+    a{
+        text-decoration: None;
+    }
+    .books{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 60px;
+    }
+    .rating-stars{
+        display: flex;
+        /* justify-content: center; */
+        padding: 5px;
+        /* color: gold; */
+    }
+    .star{
+        margin: 1px;
+    }
+    .wishlist{
+        padding: 5px;
+    }
+    .book{
+        width: 35%;
+        margin: 10px;
+        padding: 15px;
+        justify-content: center;
+        align-items: center;
+    }
+    button{
+        outline: none;
+    }
+    @media (max-width: 768px){
+        .book{
+            width: 90%;
+        }
+    }
+</style>
+
+
+<div class="home-container">
+    <div class="books">
+        {% for book in user_books %}
+            <div class="book">
+                <div>
+                    <a href="{% url 'book' book.id %}">
+                        <img src="{{ book.book.cover_img.url }}" height=280px; width=200px;>
+                    </a>
+                    <div>
+                        <h6><b>{{book.book.title}}</b></h6>
+                    </div>
+                </div>
+               
+                <div class="rating-wishlist">
+                    <div class="rating-stars">
+                        {% for star in "*****"|slice:book.rating.rating %}
+                            <!-- <i class="fa-regular fa-star"></i> -->
+                            &#9733;
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+  
+{% endblock %}

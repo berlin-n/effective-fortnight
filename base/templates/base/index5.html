@@ -1,0 +1,73 @@
+{% extends 'index7.html' %}
+
+{% block content %}
+
+<style>
+    a{
+        text-decoration: None;
+    }
+    .books{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 60px;
+    }
+    .rating-stars{
+        display: flex;
+        /* justify-content: center; */
+        padding: 5px;
+    }
+    .star{
+        margin: 1px;
+    }
+    .wishlist{
+        padding: 5px;
+    }
+    .book{
+        width: 35%;
+        margin: 10px;
+        padding: 15px;
+        justify-content: center;
+        align-items: center;
+    }
+    button{
+        outline: none;
+    }
+    @media (max-width: 768px){
+        .book{
+            width: 90%;
+        }
+    }
+</style>
+
+
+<div class="home-container">
+    <div class="books">
+        {% for book in recommended_books %}
+            <div class="book">
+                <div class="book-image">
+                    <a href="{% url 'book' book.id %}">
+                        <img src="{{ book.cover_img.url }}" height=280px; width=200px;>
+                    </a>
+                    <div class="book-title">
+                        <h6><b>{{book.title}}</b></h6>
+                    </div>
+                </div>
+
+                <div class="rating-wishlist">
+                    <div class="wishlist">
+                        <form method="post" action="{% url 'wishlist' book.id %}">
+                            {% csrf_token %}
+                            <button type="submit">Want to read</button>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+
+  
+{% endblock %}
